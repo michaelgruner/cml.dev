@@ -437,17 +437,20 @@ provisioned through environment variables instead of files.
 
 The `cml runner` command can also be used to manually set up a local machine,
 on-premise GPU cluster, or any other cloud compute resource as a self-hosted
-runner. Simply [install CML](/doc/install) and then run:
+runner. Instead of having a `launch-runner` job (as in the YAML above), simply
+[install CML](/doc/install) on the local machine and then run:
 
 ```cli
 $ cml runner launch \
   --repo="$REPOSITORY_URL" \
   --token="$PERSONAL_ACCESS_TOKEN" \
-  --labels="local,runner" \
+  --labels="cml-gpu" \
   --idle-timeout=180
 ```
 
 The machine will listen for jobs from your repository and execute them locally.
+The label(s) may be anything, but at least one of them must match the one
+configured in the `runs_on` of the YAML.
 
 ⚠️ **Warning:** anyone with access to your repository (everybody for public
 ones) may be able to execute arbitrary code on your machine. Refer to the
